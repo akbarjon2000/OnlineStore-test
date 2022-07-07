@@ -1,0 +1,45 @@
+<div class="container">
+    <h1 class="text-center">{{ collection.title }}</h1>
+    <div class="row justify-content-center">
+      <select name="sorting" id="sort_by" class="form-select w-25 mb-3">
+        {% for option in collection.sort_options %}
+          <option value="{{option.value}}" {% if option.value == collection.sort_by %}
+            selected
+          {% endif %}>{{option.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    {% paginate collection.products by 2 %}
+    <div class="row gap-2 justify-content-center">
+      {% for product in collection.products %}
+      <div class="card center" style="width:16rem; height: 20rem; position: relative;">
+        {% unless product.available %}<h2 style="position: absolute; color: red;">sold out</h2>{% endunless %}
+          <a href="{{ product.url | within: collection }}">
+            {% assign image = product.featured_media.preview_image %}
+            <div class="col">
+              {% if image != blank %}
+              <img class="card-img-top mt-1" src="{{ image | img_url : "small"}}" style="height: 14rem ;"/>
+              {% else %}
+            {{'product-1' | placeholder_svg_tag:"card-img-top "}}
+            {% endif %}
+            <div class="card-body">
+            <p><a href="{{product.url}}">{{product.title}}</a></p>
+                <p>{{product.price | money}}</p>
+            </div>
+        </div>
+          </a>
+        </div>
+        {% else %}
+        <p>no matches</p>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+      {% render 'pagination', paginate:paginate %}
+    </div>
+    {% endpaginate %}
+
+</div>
+
+
+
+
