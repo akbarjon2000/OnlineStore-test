@@ -1,21 +1,18 @@
 <!-- /templates/customers/register.liquid -->
-
-{% form 'create_customer' %}
-
-{{ form.errors | default_errors }}
-
-<label for="first_name">First Name</label>
-<input type="text" value="" name="customer[first_name]" size="30" />
-
-<label for="last_name">Last Name</label>
-<input type="text" value="" name="customer[last_name]" size="30" />
-
-<label for="email">Email Address</label>
-<input type="email" value="" name="customer[email]" size="30" />
-
-<label for="password">Password</label>
-<input type="password" value="" name="customer[password]" size="30" />
-
-<input type="submit" value="Create" />
-
-{% endform %}
+<div class="container py-5 my-5 registerContainer">
+    <div class="register-form">
+        {% include 'form-error' %}
+        <h3>Sign Up</h3>
+        {% form 'create_customer' %}
+                <label for="first_name">First Name</label>
+                <input class="form-control" type="text" value="" name="customer[first_name]" size="30" />
+                <label for="last_name">Last Name</label>
+                <input class="form-control" type="text" value="" name="customer[last_name]" size="30" />
+                <label for="email">Email Address</label>
+                <input class="form-control" type="email" value="" name="customer[email]" size="30" />
+                <label for="password">Password</label>
+                <input class="form-control" type="password" value="" name="customer[password]" size="30" />
+                <input class="btn btn-primary mt-3" type="submit" value="Create an account" />
+        {% endform %}
+    </div>
+</div>

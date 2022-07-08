@@ -22,17 +22,26 @@
       <input type="text" value="{{search.terms |escape}}" name="q"/>
       <button type="submit">Search</button>
     </form>
+    <ul class="navbar-nav">
+      {% if shop.customer_accounts_enabled %}
+      {% if customer %}
+      <li class="nav-item">
+           <a href="{{routes.account_url}}" class="nav-link">{{'general.Layout.account' | t}}</a> 
+      </li>
+      <li class="nav-item">
+           <a href="{{routes.account_logout_url}}" class="nav-link">{{'general.Layout.logout' | t}}</a> 
+      </li>
+      {% else %}
+        <li class="nav-item">
+           <a href="{{routes.account_login_url}}" class="nav-link">{{'general.Layout.login' | t}}</a> 
+        </li>    
+        <li class="nav-item">
+           <a href="{{routes.account_register_url}}" class="nav-link">{{'general.Layout.register' | t}}</a> 
+        </li>   
+      {% endif %}
+            {% endif %}
+        </ul>
       </div>
     </div>
   </div>
 </nav>
-
-  {% if shop.customer_accounts_enabled %}
-    {% if customer %}
-      <a href="/account">account</a>
-      {{ 'log out'  | customer_logout_link }}
-    {% else %}
-      {{ 'log in ' | customer_login_link }}
-      {{ 'register' | customer_register_link }}
-    {% endif %}
-  {% endif %}

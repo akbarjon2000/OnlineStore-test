@@ -1,22 +1,74 @@
-{% paginate search.results by 10 %}
-  <form action="/search" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}">
-    <button type="submit">search</button>
-  </form>
-
-  {% if search.performed %}
-    {% for item in search.results %}
-      {% if item.featured_image %}
-        <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-          {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-        </a>
-      {% endif %}
-      <h5>{{ item.title | link_to: item.url }}</h5>
-      <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+<div class="container pt-4">
+  <div class="col center w-100 mb-4">
+    <h3 class="text-center fs-2">Search More</h3>
+    <form action="/search" method="get" role="search" class=" text-center col justify-content-center mb-5">
+      <div class="row mb-4 justify-content-center" >
+        <div style="width: fit-content;">
+          <input type="checkbox" name="type" id="product_type" value="product"/>
+          <label class="form-check-label" for="product_type">Product</label>
+        </div>
+        <div style="width: fit-content;">
+          <input type="checkbox" name="type" id="article_type" value="article"/>
+          <label class="form-check-label" for="article_type">Article</label>
+        </div>
+        <div style="width: fit-content;">
+          <input type="checkbox" name="type" id="page_type" value="page"/>
+          <label class="form-check-label" for="page_type">Page</label>
+        </div>
+      </div>
+      <div class="row w-100 justify-content-center">
+        <input style="height: 40px;" type="search" name="q" value="{{ search.terms | escape }}" class="form-control w-75">
+        <button style="width: 150px; height: 40px; margin-left: 30px;" class="btn btn-primary ml-4" type="submit">search</button>
+      </div>
+    </form>
+  </div>
+  {% paginate search.results by 2 %}
+  <div class="row gap-3 mb-5">
+    {% if search.performed %}
+      {% for item in search.results %}
+        {% if item.object_type == 'product' %} 
+          <div class="card shadow w-25 h-40 p-0">
+            {% if item.featured_image %}
+              <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+               {{ item.featured_image.src | img_url: 'master' | img_tag: item.featured_image.alt, 'card-img-top' }}
+              </a>
+            {% endif %}
+              <div class="card-body">
+                <h5>{{ item.title | link_to: item.url }}</h5>
+                <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+              </div>
+          </div>
+          {% elsif item.object_type == 'article' %}
+            <div class="card shadow w-25 h-40 p-0">
+            {% if item.image %}
+              <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+               {{ item.image.src | img_url: 'master' | img_tag: item.image.alt, 'card-img-top' }}
+              </a>
+            {% endif %}
+              <div class="card-body">
+                <h5>{{ item.title | link_to: item.url }}</h5>
+                <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+              </div>
+              {% elsif item.object_type == 'page' %}
+            <div class="card shadow w-25 h-40 p-0">
+            {% if item.title %}
+              <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+               {{ item.image.src | img_url: 'master' | img_tag: item.image.alt, 'card-img-top' }}
+              </a>
+            {% endif %}
+              <div class="card-body">
+                <h5>{{ item.title | link_to: item.url }}</h5>
+                <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+              </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     {% else %}
       no results
-    {% endfor %}
-  {% endif %}
+      {% endif %}
+    </div>
+      
+      {% render 'pagination', paginate : paginate%}
+      {% endpaginate %}
+</div>
 
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
-{% endpaginate %}

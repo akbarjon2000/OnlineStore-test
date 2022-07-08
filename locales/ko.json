@@ -1,0 +1,14 @@
+{
+  "general": {
+    "404": {
+      "title": "찾을수 없읍",
+      "subtext_html": "찾고 있던 페이지가 존재하지 않습니다."
+    },
+    "Layout": {
+      "login": "로그인",
+      "logout": "로그아웃",
+      "account": "Account",
+      "register": "등록기"
+    }
+  }
+}

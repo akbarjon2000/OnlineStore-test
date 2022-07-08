@@ -1,28 +1,31 @@
 <!-- /templates/customers/login.liquid -->
+<div class="container col py-5 my-5 loginContainer">
+    <h2 style="width: fit-content;">Login</h2> 
+    {% include 'form-error', form:form %}
+    <div class="login-form col">
+        {% form 'customer_login' %}
+        {{ form.errors | default_errors }}
+        <label for="customer_email" class="label">Email Address</label>
+        <input class="form-control  rounded-0 my-2 login " type="email" name="customer[email]" />
+        <label for="customer_password" class="label">Password</label>
+        <input class="form-control  rounded-0 my-2 login"  type="password" name="customer[password]" />
+        <input class="btn btn-primary" type="submit" value="Sign In" />
+        {% endform %}
+        <a class="link" id="forgetPass" style="cursor: pointer; ">Forgot Password</a>
+        <div class="col d-none mt-3" id="forgetPasswordCon">
+            {% form 'recover_customer_password' %}
+                {% include 'form-error' %}
+                <div class="col">
+                    <label for="customer_email">Email Address</label>
+                    <input class="form-control mb-3" type="email" name="email" />
+                </div>
+                <input class="btn btn-primary" type="submit" value="Submit" />
+            {% endform %}
+        </div>
+    </div>
+</div>
 
-<h2>Login</h2>
-{% form 'customer_login' %}
 
-{{ form.errors | default_errors }}
-
-<label for="customer_email">Email Address</label>
-<input type="email" name="customer[email]" />
-
-<label for="customer_password">Password</label>
-<input type="password" name="customer[password]" />
-
-<input type="submit" value="Sign In" />
-
-{% endform %}
-
-<h2>Forgot Password</h2>
-{% form 'recover_customer_password' %}
-
-{{ form.errors | default_errors }}
-
-<label for="customer_email">Email Address</label>
-<input type="email" name="email" />
-
-<input type="submit" value="Submit" />
-
-{% endform %}
+    
+    
+    

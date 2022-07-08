@@ -1,0 +1,9 @@
+{% for error in form.errors %}
+    <div style="width: fit-content;" class="alert alert-danger">
+        {% if error == 'form' %}
+            {{form.errors.messages[error]}}
+        {% else %}
+            {{from.errors.translated_fields[error]}} {{form.errors.messages[error]}}
+        {% endif %}
+    </div>
+{% endfor %}

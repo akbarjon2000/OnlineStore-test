@@ -1,13 +1,13 @@
 <section class="container py-5">
 
     <h2 class="text-center">{{section.settings.title}}</h2>
-    <div class="row">
+    <div class="row justify-content-center gap-4">
         {% for product in collections[section.settings.featured_collection].products %}
-        <div class="card" style="width:16rem;">
+        <div class="card p-0" style="width: 18rem;" >
         {% assign image = product.featured_media.preview_image %}
         <div class="col">
             {% if image != blank %}
-            <img class="card-img-top" src="{{ image | img_url : "small"}}"/>
+            <img class="card-img-top" src="{{ image | img_url:"master"}}"/>
             {% else %}
             {{'product-1' | placeholder_svg_tag:"card-img-top "}}
             {% endif %}

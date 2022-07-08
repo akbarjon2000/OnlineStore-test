@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Themekit template theme",
+    "theme_name": "Advanced Online Store",
     "theme_version": "1.0.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://github.com/Shopify/themekit",
-    "theme_support_url": "https://github.com/Shopify/themekit/issues"
+    "theme_author": "A+X",
+    "theme_documentation_url": "https://github.com/akbarjon2000",
+    "theme_support_url": "https://portfolioakbarjon.netlify.app/"
   },
   {
     "name": "Nav bar color settings",
@@ -15,6 +15,45 @@
         "id": "navbar_color",
         "label": "Navbar background color",
         "default": "#000"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Heading Font Styles"
+      },
+      {
+        "type": "font_picker",
+        "id": "header_font",
+        "label": "Font",
+        "default": "mono"
+      },
+      {
+        "type": "header",
+        "content": "Body Font Styles"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Font",
+        "default": "mono"
+      },
+      {
+        "type": "header",
+        "content": "Body Font Size"
+      },
+      {
+        "type": "range",
+        "id": "body_font_size",
+        "label": "Font Size",
+        "default": 16,
+        "unit": "px",
+        "min": 12,
+        "max": 30,
+        "step": 1
       }
     ]
   }

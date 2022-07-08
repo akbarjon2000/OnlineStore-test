@@ -1,0 +1,9 @@
+{% form 'localization', id:'localizationFormTag', class:'dropup' %}
+    <div class="localebtn">{{'globe.jpg' | asset_img_url: '100px' | img_tag }}</div>
+    <div class="drop-up-content">
+        {% for locale in shop.published_locales %}
+            <a href="#" class="localeItem">{{locale.endonym_name}}</a>
+            <p>aaa</p>
+        {% endfor %}
+    </div>
+{% endform %}

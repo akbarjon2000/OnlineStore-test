@@ -11,8 +11,52 @@
   top: 0;
   bottom: 0;
   width: 100%;
+  height: 500px;
+  object-fit: cover;
+  // object-position: center;
   z-index: -1;
 }
 .dafault_payment_btn {
   height: 30px;
+}
+
+.dropup {
+  display: inline-block;
+  position: absolute;
+}
+
+.localebtn {
+  // background-color: #3298db;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1;
+}
+
+.localebtn img {
+  width: 60px;
+  height: 60px;
+}
+.drop-up-content {
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  right: 30px;
+  width: 100px;
+  height: 100px;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid;
+  z-index: 1;
+}
+
+.dropup:hover .drop-up-content {
+  display: flex;
+}
+
+#product-info-modal {
+  // width: 900px;
 }

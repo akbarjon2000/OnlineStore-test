@@ -1,26 +1,68 @@
 <!-- /templates/customers/account.liquid -->
+<div class="container mt-4">
+  <div class="row">
+    {% if customer.default_address | format_address %}
+    <div class="col col-md-4">
+      <h2>Account</h2>
+      <div class="mb-0">Account details:</div>
+      <p>{{customer.default_address |format_address}}</p>
+      <a href="{{routes.account_addresses_url}}" class="btn btn-light border-grey">
+        View addresses
+        <span class="badge bg-success ">{{customer.addresses_count}}</span>
+      </a>
+    </div>
+    {% endif %}
+    <div class="col-12 col-md-8">
+      <div id="customer_orders" class="customers_orders">
+        <h2>Orders</h2>
+      {% paginate customer.orders by 10 %}
+      {% if customer.orders.size != 0 %}
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Order #</th>
+              <th>Order date</th>
+              <th>Fulfillment status</th>
+              <th>Payment status</th>
+              <th>Total price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in customer.orders %}
+              <tr>
+                <td>
+                  <a href="{{order.customer_url}}">{{order.name}}</a>
+                </td>
+                <td>
+                  <span class="badge bg-info">{{order.created_at | date: format:"abbreviated_date" }}</span>
+                <td>
+                  {% if order.fulfillment_status == "fulfilled" %}
+                    <span class="badge bg-success">{{order.fulfillment_status_label}}</span>
+                  {% else %}
+                    <span class="badge bg-warning">{{order.fulfillment_status_label}}</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if order.financial_status == "paid" %}
+                    <span class="badge bg-success">{{order.financial_status_label}}</span>
+                  {% else %}
+                    <span class="badge bg-warning">{{order.financial_status_label}}</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <span class="badge bg-info">{{order.total_price | money}}</span>
+                </td>
+              </tr>
+            {% endfor %}
 
-{% if customer.default_address %}
-  <h2>Address</h2>
-  <p>{{ customer.default_address.address1 }}</p>
-  {% if customer.default_address.address2 != "" %}
-    <p>{{ customer.default_address.address2 }}</p>
-  {% endif %}
-  <p>{{ customer.default_address.city}}, {% if address.province_code %}{{ customer.default_address.province_code }}, {% endif %}{{ customer.default_address.country }}</p>
-  <p>{{ customer.default_address.zip }}</p>
-  <p>{{ customer.default_address.phone }}</p>
-{% endif %}
-
-<div id="customer_orders">
-  <h2>Orders</h2>
-  {% paginate customer.orders by 10 %}
-  {% if customer.orders.size != 0 %}
-    {% for order in customer.orders %}
-      <!-- order details here -->
-    {% endfor %}
-  {% else %}
-    <p>You haven't placed any orders yet.</p>
-  {% endif %}
-  {{ paginate | default_pagination }}
-  {% endpaginate %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>You haven't placed any orders yet.</p>
+        {% endif %}
+        {% include 'pagination' , paginate:paginate %}
+        {% endpaginate %}
+      </div>
+    </div>
+  </div>
 </div>
