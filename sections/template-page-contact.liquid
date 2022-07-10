@@ -1,0 +1,17 @@
+<div class="container d-flex flex-column align-items-center w-100">
+  <h1>{{ page.title }} us</h1>
+  {% form 'contact', class:"w-50" %}
+    {% if form.posted_successfully? %} <p class="alert alert-success">Thank you for your contact</p> {% endif %}
+    {{ form.errors | default_errors }}
+    <label class="form-label" for="ContactFormName">name</label>
+    <input class="form-control w-100" type="text" id="ContactFormName" name="contact[name]">
+    <label class="form-label" for="ContactFormEmail">email</label>
+    <input class="form-control" type="email" id="ContactFormEmail" name="contact[email]">
+    <label class="form-label" for="ContactFormPhone">phone</label>
+    <input class="form-control" type="tel" id="ContactFormPhone" name="contact[phone]">
+    <label class="form-label" for="ContactFormMessage">message</label>
+    <textarea class="form-control" rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
+    <input class="btn btn-primary my-3" type="submit" value="send">
+  {% endform %}
+
+</div>

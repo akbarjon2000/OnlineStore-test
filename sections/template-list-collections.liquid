@@ -1,0 +1,31 @@
+<div class="container">
+  {% for collection in collections %}
+    {% unless collection.handle == 'frontpage' %}
+      {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+      <!-- <a href="{{ collection.url }}">More {{ collection_title }} &rsaquo;</a> -->
+      <div class="w-100 col align-items-center g-2">
+        <h1 style="width: fit-content;" class="my-4">{{collection.title}}</h1>
+        <div class="row w-100">
+          {% for product in collection.products limit:5 %}
+            {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
+            {% assign image = product.featured_media.preview_image %}
+            <div class="col-3 g-2">
+              <div class="card p-0" style="width: 18rem; padding: 0;">
+                <img style="max-width: 18rem; max-height:18rem;" class="card-img-top" src="{{ image | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}">
+                <div class="card-body p-0 ">
+                  <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+                  {{ product.price | money }}
+                </div>
+                {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+                <a href="{{ product.url | within: collection }}">
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <a href="{{collection.url}}" class="btn btn-primary btn-lg my-3">More {{product.title}}</a>
+      </div>
+    {% endunless %}
+  {% endfor %}
+</div>
+

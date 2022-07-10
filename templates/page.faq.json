@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-page-faq",
+      "blocks": {
+        "new-faq-item": {
+          "type": "faq",
+          "settings": {
+            "title": "Why the pulsar products are vlued as the best?",
+            "answer": "<p>Because of the quality and comfort!</p>"
+          }
+        }
+      },
+      "block_order": ["new-faq-item"]
+    }
+  },
+  "order": ["template"]
+}

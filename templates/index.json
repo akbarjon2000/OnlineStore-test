@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "image": "",
+        "title": "Do not wait for what you love!",
+        "description": "<p>High quality low price</p>",
+        "button_label": "Shop now",
+        "button_link": "shopify://pages/about-us"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "featured_collection": "",
+        "title": ""
+      }
+    },
+    "order": ["hero", "featured-collection"]
+  }
+}
