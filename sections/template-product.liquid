@@ -1,0 +1,127 @@
+{% assign current_product = product.selected_or_first_available_variant %}
+{% assign product_image = current_product.featured_image | default: product.featured_image %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <img class="img-fluid " src="{{product_image | img_url : "large"}}" alt="{{product_img.alt}}" id="productMainImage"/>
+      {% for image in product.images %}
+        <img src="{{image.src |img_url : "small" }}" alt="{{image.alt}}"/>
+      {% endfor %}
+    </div>
+    <div class="col-md-6 col-12">
+      {% form 'product', product, class:"product-form", id:"AddToCartForm" %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            
+            {% when "title" %}
+              <h1>{{product.title}}</h1>
+            {% when "price" %}
+              <p>{{current_product.price | money}}</p>
+            {% when "description" %}
+              <p>{{product.description}}</p>
+            {% when "variant" %}
+              {% include 'select-input', product:product %}
+            {% when "quantity" %}
+              <div class="mt-3 mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="number" class="form-control" name="quantity" id="Quantity" value="1" min="1"/>
+              </div>
+            {% when "checkout_btns" %}
+              <button type="submit" name="add" id="AddToCart" class="btn btn-secondary w-100 rounded-0" >Add To Cart</button>
+              {% if section.settings.DynamicButtonCheckbox %}
+                  {{form | payment_button  }}
+              {% endif %}
+            {% else %}
+              
+          {% endcase %}
+        {% endfor %}
+      {% endform %}  
+    </div>
+  </div>
+</div>   
+<!-- 
+</div> -->
+<!-- variants select input is coming form snippets -->
+<div class="container d-none" id="recommend-con">
+  <h1>You may also like this!</h1>
+  <div class="card">
+
+  </div>
+</div>
+
+<script>
+  fetch("/recommendations/products.json?product_id={{product.id}}")
+  .then(resp => resp.json())
+  .then(({products}) => {
+    console.log(products)
+    if(products.length > 0 ){
+      document.getElementById('recommend-con').classList.remove('d-none')
+    }
+  })
+</script>
+      
+      
+
+   
+        
+
+        
+        
+        
+      
+
+
+
+
+{% schema %}
+{
+   "name": "Product Pages",
+  "settings": [
+   {
+        "type": "checkbox",
+        "id" :"DynamicButtonCheckbox",
+        "label":"Enable Dynamic Button",
+        "default": false
+    }
+
+  ],
+  "blocks":[
+    {
+     "type": "title",
+    "name": "Title",
+    "limit":1
+    },
+    {
+     "type": "price",
+    "name": "Price",
+    "limit":1
+    },
+    {
+     "type": "description",
+    "name": "Description",
+    "limit":1
+    },
+    {
+     "type": "variant",
+    "name": "Variant",
+    "limit":1
+    },
+    {
+     "type": "quantity",
+    "name": "quantity",
+    "limit":1
+    },
+    {
+     "type": "checkout_btns",
+    "name": "Checkout Buttons",
+    "limit":1
+    },
+    {
+     "type": "image",
+    "name": "Image",
+    "limit":1
+    }
+  ]
+}
+{% endschema %}
