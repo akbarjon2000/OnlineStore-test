@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-article",
+      "blocks": {
+        "featured-image": {
+          "type": "featured_image"
+        },
+        "title": {
+          "type": "title"
+        },
+        "article-meta": {
+          "type": "article-meta"
+        },
+        "content": {
+          "type": "content"
+        }
+      },
+      "block_order": ["featured-image", "title", "article-meta", "content"]
+    }
+  },
+  "order": ["template"]
+}

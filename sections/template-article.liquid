@@ -1,0 +1,95 @@
+{% assign number_of_comments = article.comments_count %}
+
+<article itemscope itemtype="https://schema.org/BlogPosting">
+    <div class="container mb-5">
+        {% for block in section.blocks %}
+            {% case block.type %}
+                {% when "featured_image" %}
+                    {% if article.image != blank %}
+                        <img src="{{article.image | img_url: 'master'}}" alt="" class="image-fluid my-2">
+                    {% endif %}
+                {% when "title" %}
+                    <h1>{{ article.title }}</h1>
+                {% when "article-meta" %}
+                    <p>Published by <strong>{{ article.author }}</strong> at {{ article.published_at | date: format: 'abbreviated_date' }}</p>
+                {% when "content" %}
+                        {{ article.content }}
+                        {% else %}
+                
+                    
+            {% endcase %}
+        {% endfor %}
+        <!-- <div class="container-fluid col w-100 justify-content-center align-items-center bg-light blog_title_con mb-5">
+            
+  </div> -->
+
+  
+  {% if blog.comments_enabled? %}
+  <div class="container">
+    <h2 style="color: rgb(55, 110, 228);">{{ number_of_comments }} COMMENTS</h2>
+    {% paginate article.comments by 2 %}
+      {% for comment in article.comments %}
+
+      <div class="card shadow mb-5">
+          <div class="card-header">{{ comment.author }} at {{ comment.created_at | date: format:"abbreviated_date"}}</div>
+          <div class="card-body w-100">
+              <div>{{ comment.content }}</div>
+              
+            </div>
+        </div>
+      {% endfor %}
+      {% render 'pagination', paginate:paginate%}
+      {% endpaginate %}
+      
+      <div class="form">
+          {% form 'new_comment', article %}
+          {{ form.errors | default_errors }}
+          <label for="CommentAuthor">name</label>
+          <input type="text" name="comment[author]" id="CommentAuthor" placeholder="name" value="{{ form.author }}" autocapitalize="words">
+          
+          <label for="CommentEmail">email</label>
+          <input type="email" name="comment[email]" id="CommentEmail" placeholder="email" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+          
+          <label for="CommentBody">message</label>
+          <textarea name="comment[body]" id="CommentBody" placeholder="message">{{ form.body }}</textarea>
+          
+          <input type="submit" value="post">
+          {% endform %}
+        </div>
+    </div>
+    {% endif %}
+    
+</div> 
+</article>
+
+{% schema %}
+{
+   "name": "Article Section",
+   "tag" : "section",
+   "blocks":[
+        {
+            "type":"featured_image",
+            "name":"Featured Image",
+            "limit": 1
+        },
+        {
+            "type":"title",
+            "name":"Article Title",
+            "limit": 1
+            
+        },
+        {
+            "type":"article-meta",
+            "name":"Article Meta",
+            "limit": 1
+           
+        },
+        {
+            "type":"content",
+            "name":"Article Content",
+            "limit": 1
+            
+        }
+   ]
+}
+{% endschema %}

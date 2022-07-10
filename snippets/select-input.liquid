@@ -1,0 +1,10 @@
+<select name="id" id="productSelect" class="form-select">
+          {% for variant in product.variants %}
+            {% if variant.available %}
+              <option value="{{variant.id}}">{{variant.title}}</option>
+            {% else %}
+              <option value="{{variant.id}}" disabled>{{variant.title}}</option>
+            {% endif %}
+          {% endfor %}
+
+        </select>

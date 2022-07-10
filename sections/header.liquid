@@ -17,9 +17,9 @@
       <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
     {% endif %}
   {% endfor %}
-    <a class="nav-link" href="/cart">My Cart</a>
+    <a class="nav-link" href="/cart">My Cart <span id="item-count" class="badge bg-info">{{0}}</span></a>
     <form action="/search" method="GET" role="search" style="position: absolute; right:50px;">
-      <input type="text" value="{{search.terms |escape}}" name="q"/>
+      <input id="search-input" type="text" value="{{search.terms |escape}}" name="q"/>
       <button type="submit">Search</button>
     </form>
     <ul class="navbar-nav">

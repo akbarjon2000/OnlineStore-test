@@ -12,14 +12,14 @@
     {% paginate collection.products by 2 %}
     <div class="row gap-2 justify-content-center">
       {% for product in collection.products %}
-      <div class="card center" style="width:16rem; height: 20rem; position: relative;">
+      <div class="card center p-0" style="width:16rem; height: 20rem; position: relative;">
         {% unless product.available %}<h2 style="position: absolute; color: red;">sold out</h2>{% endunless %}
           <a href="{{ product.url | within: collection }}">
             {% assign image = product.featured_media.preview_image %}
             <div class="col">
               {% if image != blank %}
-              <a href="" id="product-info-anchor">
-                <img class="card-img-top mt-1" src="{{ image | img_url : "master"}}" style="height: 14rem ;"/>
+              <a href="#" id="product-info-anchor" product-handle = "{{product.handle}}" product-price = "{{product.price | money}}">
+                <img class="card-img-top" src="{{ image | img_url : "master"}}" style="height: 14rem ;"/>
               </a>
               {% else %}
             {{'product-1' | placeholder_svg_tag:"card-img-top "}}
@@ -45,25 +45,35 @@
 
 
 
-<div class="modal fade" id="product-info-modal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-x1">
-    <div class="modal-content">
+<div class="modal fade" id="product-info-modal" tabindex="-1" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered modal-xl" >
+    <div class="modal-content" >
       <div class="modal-header">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-12 col-md-6">
-            <img class="card-img-top mt-1" src="{{ image | img_url : "master"}}" />
+            <img class="img-fluid" id="modal-image" />
           </div>
           <div class="col-12 col-md-6">
-            <p><a href="{{product.url}}">{{product.title}}</a></p>
-            <p>{{product.price | money}}</p>
-            <p>{{product.description}}</p>
+            <h1 id="productTitle"></h1>
+            <h3 id="productPrice"></h3>
+            <p id="productDescription"></p>
           </div>
         </div>
       </div>
-      <div class="modal-footer"></div>
+      <div class="modal-footer">
+        <form class="row w-100 gap-2 justify-content-end" action="#" id="addToCartForm">
+          <!-- {% include 'select-input', product:product %} -->
+          <select  name="id" id="productSelect" class="form-select w-25">
+            
+          </select>
+          <!-- <input type="hidden" name="id" id="modalItemId" value=""> -->
+          <input id="quantity" type="number" name="quantity" min="1" value="1" class="col-auto" >
+          <button class="btn btn-success w-25" type="submit" name="submitButton" >Add to cart</button>
+        </form>
+      </div>
     </div>
   </div>
 
