@@ -9,7 +9,7 @@
                         <img src="{{article.image | img_url: 'master'}}" alt="" class="image-fluid my-2">
                     {% endif %}
                 {% when "title" %}
-                    <h1>{{ article.title }}</h1>
+                    <h1 class="my-5" style="font-family: 'Times New Roman', Times, serif;">{{ article.title }}</h1>
                 {% when "article-meta" %}
                     <p>Published by <strong>{{ article.author }}</strong> at {{ article.published_at | date: format: 'abbreviated_date' }}</p>
                 {% when "content" %}
@@ -42,18 +42,18 @@
       {% endpaginate %}
       
       <div class="form">
-          {% form 'new_comment', article %}
+          {% form 'new_comment', article  %}
           {{ form.errors | default_errors }}
-          <label for="CommentAuthor">name</label>
-          <input type="text" name="comment[author]" id="CommentAuthor" placeholder="name" value="{{ form.author }}" autocapitalize="words">
+          <label for="CommentAuthor">Name</label>
+          <input class="form-control w-50 mb-2" type="text" name="comment[author]" id="CommentAuthor" placeholder="name" value="{{ form.author }}" autocapitalize="words">
           
-          <label for="CommentEmail">email</label>
-          <input type="email" name="comment[email]" id="CommentEmail" placeholder="email" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+          <label for="CommentEmail">Email</label>
+          <input class="form-control w-50  mb-2" type="email" name="comment[email]" id="CommentEmail" placeholder="email" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
           
-          <label for="CommentBody">message</label>
-          <textarea name="comment[body]" id="CommentBody" placeholder="message">{{ form.body }}</textarea>
+          <label for="CommentBody ">Message</label>
+          <textarea class="form-control w-50" name="comment[body]" id="CommentBody" placeholder="message">{{ form.body }}</textarea>
           
-          <input type="submit" value="post">
+          <input class="btn btn-primary my-3" type="submit" value="post">
           {% endform %}
         </div>
     </div>

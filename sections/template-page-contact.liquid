@@ -1,8 +1,10 @@
 <div class="container d-flex flex-column align-items-center w-100">
-  <h1>{{ page.title }} us</h1>
+  <h1 class="my-5" style="font-family: 'Times New Roman', Times, serif;">{{ page.title }} us</h1>
   {% form 'contact', class:"w-50" %}
     {% if form.posted_successfully? %} <p class="alert alert-success">Thank you for your contact</p> {% endif %}
-    {{ form.errors | default_errors }}
+    <div class="alert alert-danger m-0" style="height: fit-content;">
+      {{ form.errors | default_errors }}
+    </div>
     <label class="form-label" for="ContactFormName">name</label>
     <input class="form-control w-100" type="text" id="ContactFormName" name="contact[name]">
     <label class="form-label" for="ContactFormEmail">email</label>

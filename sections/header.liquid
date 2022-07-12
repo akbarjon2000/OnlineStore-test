@@ -1,46 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #8da9c4;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">{{'a_x_medium.jpg' | asset_img_url: 'small' | img_tag }}</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav me-auto position-relative w-100">
-        {% for link in linklists.main-menu.links %}
-    {% assign child_list_handle = link.title | handleize %}
-    {% if linklists[child_list_handle].links != blank %}
-      <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
-      [{% for childlink in linklists[child_list_handle].links %}
-        <a class="nav-link" href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
-      {% endfor %}]
-    {% else %}
-      <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
-    {% endif %}
-  {% endfor %}
-    <a class="nav-link" href="/cart">My Cart <span id="item-count" class="badge bg-info">{{0}}</span></a>
-    <form action="/search" method="GET" role="search" style="position: absolute; right:50px;">
-      <input id="search-input" type="text" value="{{search.terms |escape}}" name="q"/>
-      <button type="submit">Search</button>
-    </form>
-    <ul class="navbar-nav">
-      {% if shop.customer_accounts_enabled %}
-      {% if customer %}
-      <li class="nav-item">
-           <a href="{{routes.account_url}}" class="nav-link">{{'general.Layout.account' | t}}</a> 
-      </li>
-      <li class="nav-item">
-           <a href="{{routes.account_logout_url}}" class="nav-link">{{'general.Layout.logout' | t}}</a> 
-      </li>
-      {% else %}
-        <li class="nav-item">
-           <a href="{{routes.account_login_url}}" class="nav-link">{{'general.Layout.login' | t}}</a> 
-        </li>    
-        <li class="nav-item">
-           <a href="{{routes.account_register_url}}" class="nav-link">{{'general.Layout.register' | t}}</a> 
-        </li>   
-      {% endif %}
+      <div class="navbar-nav me-auto position-relative w-100 d-flex justify-content-between">
+        <div class="row row-cols-1 row-cols-md-4">
+          {% for link in linklists.main-menu.links %}
+          {% assign child_list_handle = link.title | handleize %}
+          {% if linklists[child_list_handle].links != blank %}
+          <a class="nav-link" style="width: fit-content;" href="{{ link.url }}">{{ link.title }}</a>
+          [{% for childlink in linklists[child_list_handle].links %}
+          <a class="nav-link"  style="width: fit-content;"  href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+          {% endfor %}]
+          {% else %}
+          <a class="nav-link" style="width: fit-content;"  href="{{ link.url }}">{{ link.title }}</a>
+          {% endif %}
+          {% endfor %}
+          <a class="nav-link" style="width: fit-content;"  href="/cart">My Cart <span id="item-count" class="badge bg-info">{{0}}</span></a>
+        </div>
+          <div class="row d-flex align-items-center"  style="width: fit-content;" >
+
+            <ul class="navbar-nav"  style="width: fit-content;" >
+              {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+            <li class="nav-item">
+              <a style="width: fit-content;"  href="{{routes.account_url}}" class="nav-link">{{'general.Layout.account' | t}}</a> 
+            </li>
+            <li class="nav-item">
+              <a style="width: fit-content;"  href="{{routes.account_logout_url}}" class="nav-link">{{'general.Layout.logout' | t}}</a> 
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a style="width: fit-content;"  href="{{routes.account_login_url}}" class="nav-link">{{'general.Layout.login' | t}}</a> 
+            </li>    
+            <li class="nav-item">
+              <a style="width: fit-content;"  href="{{routes.account_register_url}}" class="nav-link">{{'general.Layout.register' | t}}</a> 
+            </li>   
             {% endif %}
-        </ul>
+            {% endif %}
+          </ul>
+          <form class="me-3 container d-flex p-0" action="/search" method="GET" role="search"  style="width: fit-content;" >
+            <input class="form-control w-75 " id="search-input" type="text" value="{{search.terms |escape}}" name="q" style="margin-right:10px;"/>
+            <button class="btn btn-success btn-sm w-25" type="submit">Search</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 {% assign current_product = product.selected_or_first_available_variant %}
 {% assign product_image = current_product.featured_image | default: product.featured_image %}
 
-<div class="container">
+<div class="container my-4">
   <div class="row">
     <div class="col-md-6 col-12">
       <img class="img-fluid " src="{{product_image | img_url : "large"}}" alt="{{product_img.alt}}" id="productMainImage"/>
@@ -15,7 +15,7 @@
           {% case block.type %}
             
             {% when "title" %}
-              <h1>{{product.title}}</h1>
+              <h1 style="font-family: 'Times New Roman', Times, serif;">{{product.title}}</h1>
             {% when "price" %}
               <p>{{current_product.price | money}}</p>
             {% when "description" %}
@@ -44,8 +44,8 @@
 </div> -->
 <!-- variants select input is coming form snippets -->
 <div class="container d-none" id="recommend-con">
-  <h1>You may also like this!</h1>
-  <div class="card">
+  <h1>You may also like these!</h1>
+  <div class="row" id="recommend-row">
 
   </div>
 </div>
@@ -56,7 +56,32 @@
   .then(({products}) => {
     console.log(products)
     if(products.length > 0 ){
+      console.log("products:" , products)
+      var recommandrow = document.getElementById("recommend-row");
+      card = '<div class ="row g-2" style = "width:fit-content;" >'
+        if(recommandrow !== null){
+        console.log(recommandrow)
+        products.forEach((product) => {
+          card+=`
+            <div class="card p-0 my-3" style="width:18rem; margin-right:20px;" >
+              <img class="card-img-top" src="${product.images[0]}"/>
+              <div class="card-body d-flex flex-column align-items-center">
+                  <h6 class="text-center">${product.title}</h6>
+                  <span class="row">
+                      <p class="text-decoration-line-through border-width-2 border-dark border-end" style="width: fit-content;">₩${product.compare_at_price}</p>
+                      <p style="width: fit-content;">₩${product.price}</p>
+                  </span>
+                  <a class="btn rounded-0 border border-dark" href="${product.url}">Add to cart</a>
+              </div>
+            </div>
+          `
+        });
+        card += '<div>'
+        recommandrow.innerHTML = card
+        
+      }
       document.getElementById('recommend-con').classList.remove('d-none')
+
     }
   })
 </script>

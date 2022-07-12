@@ -127,7 +127,29 @@ if (searchInput !== null) {
                     suggest_modal = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"))
                 }
                 if (products.length > 0) {
-                    suggest_modal.show()
+                    var canvas_body = document.getElementById("canvas-body")
+                    var card;
+                    if (canvas_body !== null) {
+                        card = '<div class ="col g-2" style = "width:fit-content;" >'
+                        products.forEach((product) => {
+                            card += `<div class="card p-0 my-3 mx-0" style="" >
+                                <img class="card-img-top" src="${product.image}"/>
+                                <div class="card-body d-flex flex-column align-items-center">
+                                    <h6 class="text-center">${product.title}</h6>
+                                    <span class="row">
+                                        <p class="text-decoration-line-through border-width-2 border-dark border-end" style="width: fit-content;">${product.compare_at_price_max}</p>
+                                        <p style="width: fit-content;">${product.price}</p>
+                                    </span>
+                                    <a class="btn rounded-0 border border-dark" href="${product.url}">Add to cart</a>
+                                </div>
+                            </div>`
+                        })
+                        canvas_body.innerHTML = card;
+                    }
+                    card += '<div>'
+                    setTimeout(() => {
+                        suggest_modal.show()
+                    }, 2000)
                 }
             })
     })

@@ -10,15 +10,18 @@
             {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
             {% assign image = product.featured_media.preview_image %}
             <div class="col-3 g-2">
-              <div class="card p-0" style="width: 18rem; padding: 0;">
-                <img style="max-width: 18rem; max-height:18rem;" class="card-img-top" src="{{ image | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}">
-                <div class="card-body p-0 ">
-                  <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-                  {{ product.price | money }}
-                </div>
-                {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
-                <a href="{{ product.url | within: collection }}">
-                </a>
+               <div class="card p-0" style="width: 18rem;" >
+                  <div class="col">
+                      <img class="card-img-top" src="{{ image | img_url:"master"}}"/>  
+                      <div class="card-body d-flex flex-column align-items-center">
+                      <h6 class="text-center">{{product.title}}</h6>
+                      <span class="row">
+                          <p class="text-decoration-line-through border-width-2 border-dark border-end" style="width: fit-content;">{{product.compare_at_price | money}}</p>
+                          <p style="width: fit-content;">{{product.price | money}}</p>
+                      </span>
+                      <a class="btn rounded-0 border border-dark" href="{{product.url}}">Add to cart</a>
+                      </div>
+                  </div>
               </div>
             </div>
           {% endfor %}

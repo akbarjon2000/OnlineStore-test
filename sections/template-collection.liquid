@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-center">{{ collection.title }}</h1>
+    <h1 class="text-center my-5" style="font-family: 'Times New Roman', Times, serif;">{{ collection.title }}</h1>
     <div class="row justify-content-center">
       <select name="sorting" id="sort_by" class="form-select w-25 mb-3">
         {% for option in collection.sort_options %}
@@ -9,11 +9,11 @@
         {% endfor %}
       </select>
     </div>
-    {% paginate collection.products by 2 %}
+    {% paginate collection.products by 4 %}
     <div class="row gap-2 justify-content-center">
       {% for product in collection.products %}
       <div class="card center p-0" style="width:16rem; height: 20rem; position: relative;">
-        {% unless product.available %}<h2 style="position: absolute; color: red;">sold out</h2>{% endunless %}
+        {% unless product.available %}<h2 class="border rounded-0 border-dark p-1" style="position: absolute; color: #ef7b45; right: 10px; top: 10px;">sold out</h2>{% endunless %}
           <a href="{{ product.url | within: collection }}">
             {% assign image = product.featured_media.preview_image %}
             <div class="col">

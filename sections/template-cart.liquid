@@ -1,5 +1,6 @@
 <div class="container">
   {% if cart.item_count > 0 %}
+  <h1 class="text-center my-5" style="font-family: 'Times New Roman', Times, serif;">Cart</h1>
       <form class="row">
         <div class="col-12 col-md-8">
           <div class="card shadow">
@@ -22,7 +23,7 @@
                       <td>
                         <a href="{{ item.url }}">{{ item.product.title }}</a>
                         <p class="small">
-                          {{ item.variant.title }}
+                          Option: {{ item.variant.title }}
                         </p>
                         <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn btn-secondary">remove</a>
                       </td>
@@ -48,12 +49,12 @@
               {% for block in section.blocks %}
                 {% case block.type %}
                   {% when "cart_total" %}
-                    <p>Total amout:</p>
-                    <p>{{ cart.total_price | money }}</p>
+                    <h3>Total amout:</h3>
+                    <h5>{{ cart.total_price | money }}</h5>
                   {% when "cart_checkout_btn" %}
                     <div class="d-grid gap-2">
                       <button type="submit" class="btn btn-primary" name="update">Update</button>
-                      <button type="submit" class="btn btn-primary" name="checkout">Checkout</button>
+                      <a type="submit" class="btn btn-primary" href="/checkout" name="checkout">Checkout</a>
                     </div>
                   {% else %}
                 {% endcase %}

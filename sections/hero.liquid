@@ -1,6 +1,19 @@
 <section class="inner-hero-section">
     {% if section.settings.image != blank %}
-        <img class="image image-center" src="{{section.settings.image | img_url:"master" }}" alt="{{section.settings.image.alt}}" />
+        <!-- <img class="image image-center" src="{{section.settings.image | img_url:"master" }}" alt="{{section.settings.image.alt}}" /> -->
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <img src="{{section.settings.image | img_url:"master" }}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                <img src="{{"keyboard.jpg" | asset_img_url: 'master'}}" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                <img src="{{"yes_no.jpg" | asset_img_url: 'master'}}" class="d-block w-100" alt="...">
+                </div>
+            </div>
+        </div>
     {% else %}
         {{'lifestyle-1' | placeholder_svg_tag: "placeholder_svg" }}    
     {% endif %}
@@ -14,6 +27,7 @@
         </div>
     </div>
 </section>
+
 
 
 {% schema %}
