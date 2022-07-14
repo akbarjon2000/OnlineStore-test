@@ -1,16 +1,23 @@
+<div class="container-fluid" style=" height: 100vh;">
+    <h1 class="text-center mt-3" style="color: #283d3b;  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Customize Your Gaming Mouse</h1>
+    <div class="w-100 p-5"  style="display: flex; flex-direction: row; justify-content: space-between; width:100%;">
+        <div class="card border-0 shadow" style="width: 45rem;">
+            <div class="card-body">
+                <img class="img" src="{{"bl-wrless.png" | asset_img_url: "master"}}" />
+            </div>
+        </div>
+        <div class="card border-0 shadow" style="width: 45rem;">
+            <div class="card-body">
+                <button class="btn btn-primary" id="black">black</button>
+                <div class="btn btn-primary" id="white">white</div>
+                <div class="btn btn-primary" id="wire">wire</div>
+                <div class="btn btn-primary" id="wireless">wireless</div>
+                <div class="btn btn-primary" id="linear">linear pad</div>
+                <div class="btn btn-primary" id="square">square pad</div>
+            </div>
+        </div>
+    </div>
 
-<div class="{{section.settings.container}}">
-    {% for block in section.blocks %}
-        {% case block.type %}
-            {% when "page_title" %}
-                <h1>{{ page.title }}</h1>
-            {% when "page_date" %}
-                <small class="mb-4">{{page.published_at | date : "%B %d, %Y"}}</small>
-            {% when "page_content" %}
-                <div>{{ page.content }}</div>
-            {% else %}      
-        {% endcase %}
-    {% endfor %}
 </div>
     
     

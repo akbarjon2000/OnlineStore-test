@@ -1,0 +1,57 @@
+Mouse
+<div class="{{section.settings.container}}">
+    {% for block in section.blocks %}
+        {% case block.type %}
+            {% when "page_title" %}
+                <h1>{{ page.title }}</h1>
+            {% when "page_date" %}
+                <small class="mb-4">{{page.published_at | date : "%B %d, %Y"}}</small>
+            {% when "page_content" %}
+                <div>{{ page.content }}</div>
+            {% else %}      
+        {% endcase %}
+    {% endfor %}
+</div>
+    
+    
+
+{% schema %}
+{
+   "name": "Page settings",
+    "settings": [
+    {
+       "type": "select",
+       "id": "container",
+       "label" :"Layout",
+       "options":
+            [
+                {
+                    "value": "container",
+                    "label": "Container"
+                },
+                {
+                    "value": "container-fluid",
+                    "label": "Container-fluid"
+                }
+            ]
+    }
+  ],
+  "blocks":[
+    {
+       "type": "page_title",
+      "name": "Title",
+      "limit":1
+    },
+    {
+       "type": "page_date",
+      "name": "Date",
+      "limit":1
+    },
+    {
+       "type": "page_content",
+      "name": "Content",
+      "limit":1
+    }
+  ]
+}
+{% endschema %}
