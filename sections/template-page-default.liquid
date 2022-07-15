@@ -1,21 +1,55 @@
-<div class="container-fluid" style=" height: 100vh;">
+<div class="container-fluid" >
     <h1 class="text-center mt-3" style="color: #283d3b;  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Customize Your Gaming Mouse</h1>
     <div class="w-100 p-5"  style="display: flex; flex-direction: row; justify-content: space-between; width:100%;">
-        <div class="card border-0 shadow" style="width: 45rem;">
+        <div class="card border-0 shadow d-flex flex-column align-items-center" style="width: 45rem;">
             <div class="card-body">
-                <img class="img" src="{{"bl-wrless.png" | asset_img_url: "master"}}" />
+                <img class="img" id="mouse_img" src="{{"bl-wrless.png" | asset_img_url: 'master'}}" />
+            </div>
+                <div class="total mb-3" id="total">Total: ₩<output id="output" >{{100000}}</output></div>
+                <button class="btn btn-primary w-25 mb-4" id="addCustomMouse">Add To Cart</button>
+                <!-- <button id="smth">Smth</button> -->
+        </div>
+        <div class="card p-4 border-0 shadow" style="width: 45rem;">
+            <div class="card-body">
+                <div class="col">
+                    <p class="select_title">Select Color</p>
+                    <div class="row w-100">
+                        <button class="selector active_selector mx-3 my-3" style="background-color: #000; color: white;" id="black">black</button>
+                        <button class="selector mx-3 my-3" style="background-color:#fff; color: black;" id="white">white</button>
+                    </div>
+                    <h4 class="select_title">Select Connection Method</h4>
+                    <div class="row w-100">
+                        <button class="button mx-3 my-3" id="wire">
+                            <img class="selector_image" src="{{"wire.png" | asset_img_url : "master" }}"   />
+                        </button>
+                        <button class="button active_button mx-3 my-3" id="wireless">
+                            <img class="selector_image" src="{{"wifi.png" | asset_img_url : "master" }}" />
+                        </button>
+                    </div>
+                    <h4 class="select_title">Would you like grip tape?</h4>
+                    <div class="row">
+                        <button class="button mx-3 my-3" id="grip" >
+                            <img class="selector_image"  src="{{"grid.png" | asset_img_url : "master" }}"  />
+                        </button>
+                    </div>
+                    <h4 class="select_title">Select pad</h4>
+                    <div class="row">
+                        <button class="button mx-3 my-3" id="linear">
+                            <img class="selector_image" src="{{ "linearpad.png" | asset_img_url: "master" }}" />
+                        </button>
+                        <button class="button active_button mx-3 my-3" id="square">
+                            <img class="selector_image" src="{{ "sqpad.png" | asset_img_url: "master" }}"  />
+                        </button>
+                        <button class="button mx-3 my-3" id="glass" >
+                            <img class="selector_image" src="{{ "glide.png" | asset_img_url: "master" }}" />
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card border-0 shadow" style="width: 45rem;">
-            <div class="card-body">
-                <button class="btn btn-primary" id="black">black</button>
-                <div class="btn btn-primary" id="white">white</div>
-                <div class="btn btn-primary" id="wire">wire</div>
-                <div class="btn btn-primary" id="wireless">wireless</div>
-                <div class="btn btn-primary" id="linear">linear pad</div>
-                <div class="btn btn-primary" id="square">square pad</div>
-            </div>
-        </div>
+        <!-- {% form 'product', {title:"smth", price:50000, new_comment:""} %}
+            <button type="submit" name="add" id="AddToCart" >Add to cart</button>
+        {%endform%} -->
     </div>
 
 </div>
@@ -62,3 +96,8 @@
   ]
 }
 {% endschema %}
+
+
+
+
+
